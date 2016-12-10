@@ -1,0 +1,55 @@
+Generates SAML response:
+
+1. you need a public/private key stored in a JAVA key store
+
+   the followings will generate RSA public/private key pairs in the testkeys.jks. Also will generate a self signed certificate that have 3 years validity.
+   You need to answer the FQDN question. Enter the name data properly. 
+   keytool -genkeypair -keyalg rsa -keystore d:/dev/dfsamllib/trunk/src/main/resources/testkeys.jks -alias dfsamltest1 -validity 1080 -keysize 2048 -storepass pass123 -keypass pass123
+   
+What is your first and last name?
+  [Unknown]:  samltest1.drfirst.com
+What is the name of your organizational unit?
+  [Unknown]:  Dev
+What is the name of your organization?
+  [Unknown]:  DrFirst
+What is the name of your City or Locality?
+  [Unknown]:  Rockville
+What is the name of your State or Province?
+  [Unknown]:  MD
+What is the two-letter country code for this unit?
+  [Unknown]:  US
+Is CN=samltest1.drfirst.com, OU=Dev, O=DrFirst, L=Rockville, ST=MD, C=US correct
+?
+  [no]:  yes
+
+
+   you can export the certificate, you only need store password for the public key certificate.
+   The file is binary.
+   keytool -export -keystore d:/dev/dfsamllib/trunk/src/main/resources/testkeys.jks -storepass pass123 -alias dfsamltest1 -file d:/dev/dfsamllib/trunk/src/main/resources/dfsamltest1.cer
+   
+   into base64 encodes printable format
+   keytool -export -keystore d:/dev/dfsamllib/trunk/src/main/resources/testkeys.jks -storepass pass123 -alias dfsamltest1 -rfc -file d:/dev/dfsamllib/trunk/src/main/resources/dfsamltest1.rfc
+   NOTE: -rfc generate base64 encoded standard format. It is better to use this format.
+   
+   To see what's inside the certificate
+   keytool -printcert -file d:/dev/dfsamllib/trunk/src/main/resources/dfsamltest1.rfc
+   keytool -printcert -file d:/dev/dfsamllib/trunk/src/main/resources/dfsamltest1.cer
+   
+   Now you can use the private key in the key store to signed SANML Response XML 
+   and the destination "Audience URL" need to use the certificate to validate the XML.
+   
+ **************************************************** 
+ To generate a SAML response use SAMLResponseMaker see example genSAML(), in SAMLTestMain.java
+ 
+ ****************************************************
+ To validate SAML and get data out of SAML use SAML20Validator(see SAMLTestMain.java examples)
+ 1. you need to parse the XML using validator
+ 2. get the issuer, and use issuer to retrieve the needed certificate for SAML signature validation. The public key certificate
+    can be stored in the DB(in the RFC printable text format), in a Java key store or in a file. That is the certificate 
+    need to be pre-registered and validated.
+ 3. SAML signature can also be validated using the certificate embedded in the SAML's <SignatureInfo>. In this case 
+    for security reason, the certificate needed to be validated. In the example we did not validate the certificate which is not secured.
+ 4. Further authentication security can be embedded in the AuthN in the SAML, but we are not doing it here.
+ 
+ 
+  
