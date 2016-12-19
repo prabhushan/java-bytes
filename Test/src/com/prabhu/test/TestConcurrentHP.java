@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TestConcurrentHP {
+public class TestConcurrentHP {/*
 
 	//static volatile Map<Object, Object> testMap = new ConcurrentHashMap<>();
 	static volatile Map<Object, Object> testMap = Collections.synchronizedMap(new HashMap<Object, Object>());
@@ -40,4 +40,4 @@ public class TestConcurrentHP {
 			}
 		}
 	}
-}
+*/}
