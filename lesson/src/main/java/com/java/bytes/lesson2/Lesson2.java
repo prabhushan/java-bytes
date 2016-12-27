@@ -129,10 +129,12 @@ public class Lesson2 {
 		try (BufferedReader reader = Files.newBufferedReader(Paths.get("SonnetI.txt"), StandardCharsets.UTF_8)) {
 			reader.lines().flatMap(s -> p.splitAsStream(s)).map(s -> s.toLowerCase()).distinct()
 					.sorted((String s1, String s2) -> {
-						if (s1.length() < s2.length())
+						if (s1.length() > s2.length())
 							return 1;
-						else
+						else if(s1.length() < s2.length())
 							return -1;
+						else 
+							return 0;
 					}).forEach(s -> System.out.println(s));
 		}
 	}
