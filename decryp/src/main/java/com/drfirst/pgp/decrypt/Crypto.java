@@ -38,16 +38,33 @@ public class Crypto {
 		String passPhrase = "drfirst";
 		String outputFilePath1 = keyPath + "decrypt1.txt";
 		String outputFilePath2 = keyPath + "decrypt2.txt";
-
+		String testFile = "/Users/prabhu/Desktop/prabhu/learning/java-bytes/java-bytes/sso/resources/dfsamltest1.rfc";
 		String fullPath = keyPath + "queueTest.json";
 
-		FileInputStream fileInputStream = new FileInputStream(privKeyFile);
+		FileInputStream fileInputStream = new FileInputStream(testFile);
 
-		// System.out.println(readStringFromInputStream(fileInputStream1));
-		System.out.println(Crypto.decryptwithKeyAsString(fullPath, readBytesFromInputStream(fileInputStream),
-				passPhrase, outputFilePath1));
-		System.out.println(Crypto.decryptwithKeyAsFile(fullPath, privKeyFile, passPhrase, outputFilePath2));
+		 System.out.println(readStringFromInputStream(fileInputStream));
+		//System.out.println(Crypto.decryptwithKeyAsString(fullPath, readBytesFromInputStream(fileInputStream),passPhrase, outputFilePath1));
+		//System.out.println(Crypto.decryptwithKeyAsFile(fullPath, privKeyFile, passPhrase, outputFilePath2));
 	}
+	
+	
+	private static String readStringFromInputStream(FileInputStream fileInputStream) {
+		byte[] buffer = null;
+		try {
+
+			while (fileInputStream.available() > 0) {
+				buffer = new byte[fileInputStream.available()];
+				fileInputStream.read(buffer);
+				
+			}
+			
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		}
+		return new String(buffer);
+	}
+
 
 	private static byte[] readBytesFromInputStream(FileInputStream fileInputStream) {
 		byte[] buffer = null;
