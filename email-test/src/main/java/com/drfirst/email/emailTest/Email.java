@@ -27,13 +27,11 @@ public class Email {
 
 	private void sendEmail(EmailVO emailVO) {
 		Properties props = System.getProperties();
-		props.put("mail.smtps.host", emailVO.smtphost);
-		props.put("mail.smtps.auth", "true");
 		try {
 			Session session = Session.getInstance(props);
 			SMTPTransport t = null;
 			MimeMessage message = buildMessage(session, emailVO, props);
-			t = (SMTPTransport) session.getTransport("smtps");
+			t = (SMTPTransport) session.getTransport("smtp");
 			t.connect(emailVO.smtphost,Integer.parseInt(emailVO.port), emailVO.username, emailVO.password);
 			t.sendMessage(message, message.getAllRecipients());
 		} catch (Exception e) {
