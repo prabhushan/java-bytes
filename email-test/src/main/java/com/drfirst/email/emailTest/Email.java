@@ -32,7 +32,7 @@ public class Email {
 			SMTPTransport t = null;
 			MimeMessage message = buildMessage(session, emailVO, props);
 			t = (SMTPTransport) session.getTransport("smtp");
-			t.connect(emailVO.smtphost,Integer.parseInt(emailVO.port), emailVO.username, emailVO.password);
+			t.connect(emailVO.smtphost,emailVO.username, emailVO.password);
 			t.sendMessage(message, message.getAllRecipients());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
