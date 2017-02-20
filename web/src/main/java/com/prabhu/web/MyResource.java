@@ -1,13 +1,19 @@
 package com.prabhu.web;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
-//@Path("/myresource")
-@RestController
-public class MyResource {
+import org.glassfish.jersey.server.ResourceConfig;
 
-	@RequestMapping("/greeting")
+@Path("/myresource")
+
+public class MyResource extends ResourceConfig{
+	
+//	public MyResource() {
+//		packages("com.prabhu.web");
+//	}
+
+	@GET
 	public String name() {
 		return "hello World";
 		
