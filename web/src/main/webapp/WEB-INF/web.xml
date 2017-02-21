@@ -9,7 +9,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>com.prabhu.web.MyResource</param-value>
+            <param-value>com.prabhu.web;com.prabhu.filter</param-value>
         </init-param>
     </servlet>
 	<servlet-mapping>
