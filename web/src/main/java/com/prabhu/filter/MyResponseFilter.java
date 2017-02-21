@@ -14,7 +14,7 @@ import javax.ws.rs.ext.Provider;
 import com.prabhu.annotations.Audit;
 
 @Provider
-public class MyRequestFilter implements ContainerResponseFilter {
+public class MyResponseFilter implements ContainerResponseFilter {
 
 	@Context
 	private ResourceInfo resourceInfo;
@@ -23,11 +23,10 @@ public class MyRequestFilter implements ContainerResponseFilter {
 			throws IOException {
 		System.out.println(resourceInfo.getResourceMethod().getAnnotation(Audit.class).clazz());
 		System.out.println(responseContext.getEntityType());
-		Class<AuditManager> c = resourceInfo.getResourceMethod().getAnnotation(Audit.class).clazz();
+		Class<BaseAudit> c = resourceInfo.getResourceMethod().getAnnotation(Audit.class).clazz();
 		try {
-			Constructor<AuditManager> constrcr = c.getConstructor();
-			String result = constrcr.newInstance().constructAuditEvent(requestContext, responseContext);
-			System.out.println("RESULT--"+result);
+			Constructor<BaseAudit> constrcr = c.getConstructor();
+			AuditEvent result = constrcr.newInstance().constructAuditEvent(requestContext, responseContext);
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
