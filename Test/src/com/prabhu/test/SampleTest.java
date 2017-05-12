@@ -5,7 +5,7 @@ public class SampleTest {
 	public int a = 5;
 
 	public void doSomething() {
-		int b = 10;
+		final int b = 10;
 		Runnable runnable = new Runnable() {
 			public void run() {
 				System.out.println(a+10);
