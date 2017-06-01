@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Invoker {
 
-	List<Command> listCommand = new ArrayList<>();
+	List<Command> listCommand = new ArrayList<Command>();
 
 	public void acceptCommand(Command command) {
 		listCommand.add(command);

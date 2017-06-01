@@ -1,19 +1,7 @@
 package com.drfirst.email.emailTest;
 
-import java.util.Date;
-import java.util.Properties;
 
-import javax.mail.Address;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-
-import com.sun.mail.smtp.SMTPTransport;
-
-public class Email {
+public class Email {/*
 	public static void main(String[] args) {
 		if (args != null && args.length == 7) {
 			EmailVO email = new EmailVO(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
@@ -63,7 +51,7 @@ public class Email {
 		return message;
 	}
 
-}
+*/}
 
 class EmailVO {
 	String smtphost;
