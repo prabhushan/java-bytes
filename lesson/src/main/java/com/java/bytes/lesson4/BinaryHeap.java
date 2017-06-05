@@ -19,6 +19,7 @@ public class BinaryHeap {
 	}
 
 	private void sink(int k) {
+		int size = 0;
 		while (2*k <= size) {
 			if (heap[2 * k] > heap[(2 * k) + 1]) {
 				swap(k, 2 * k);

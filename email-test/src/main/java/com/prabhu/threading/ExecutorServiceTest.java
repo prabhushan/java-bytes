@@ -30,7 +30,7 @@ public class ExecutorServiceTest {
 				for (Future<String> oneFuture : listFuture) {
 					String result = null;
 
-					if (oneFuture != null) {
+					if (oneFuture != null && !oneFuture.isCancelled()) {
 						System.out.println("received time "+new Date());
 						try {
 							System.out.println(oneFuture.get());
