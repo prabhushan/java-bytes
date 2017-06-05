@@ -16,10 +16,10 @@ public class ThreadStart {
 
 			public String call() throws Exception {
 				try{
-					Thread.sleep(500);
+					Thread.sleep(5000);
 					System.out.println("Inside thread");
-					throw new NullPointerException("insider exception");
-					//return "hello world";
+					//throw new NullPointerException("insider exception");
+					return "hello world";
 				}
 				catch(InterruptedException ex){
 					System.out.println("Interrupted inside thread");
@@ -34,7 +34,7 @@ public class ThreadStart {
 			System.out.println(future.get(5000,TimeUnit.MILLISECONDS));
 		} catch (InterruptedException | ExecutionException | TimeoutException e) {
 			System.out.println("Cancelling thread");
-			future.cancel(true);
+			future.cancel(false);
 			e.printStackTrace();
 		}finally{
 			executor.shutdown();

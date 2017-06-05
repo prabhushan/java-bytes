@@ -12,6 +12,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
 import com.prabhu.annotations.Audit;
+import com.prabhu.annotations.TransactionContext;
 
 @Provider
 public class MyResponseFilter implements ContainerResponseFilter {
@@ -23,6 +24,7 @@ public class MyResponseFilter implements ContainerResponseFilter {
 			throws IOException {
 		System.out.println(resourceInfo.getResourceMethod().getAnnotation(Audit.class).clazz());
 		System.out.println(responseContext.getEntityType());
+		System.out.println("##########-->"+TransactionContext.getContext());
 		Class<BaseAudit> c = resourceInfo.getResourceMethod().getAnnotation(Audit.class).clazz();
 		try {
 			Constructor<BaseAudit> constrcr = c.getConstructor();
