@@ -1,4 +1,6 @@
-package com.prabhu.designpatterns.factoryMethod;
+package com.prabhu.designpatterns.abstractFactoryPattern;
+
+import com.prabhu.designpatterns.abstractFactoryPattern.pizza.Pizza;
 
 public abstract class PizzaStore {
 	//factory method

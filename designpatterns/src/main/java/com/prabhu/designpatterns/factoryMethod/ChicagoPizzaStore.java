@@ -6,7 +6,7 @@ public class ChicagoPizzaStore extends PizzaStore{
 	public Pizza createPizza(String type) {
 		Pizza pizza = null;
 		if(type=="veggie"){
-			pizza = new ChicagoStylePizza("Chicago Veggie");
+			pizza = new ChicagoVeggiePizza("Chicago Veggie");
 		}
 		else if(type=="chicken"){
 			pizza = new ChicagoStylePizza("Chicago Chicken");

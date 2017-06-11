@@ -12,6 +12,9 @@ public class Test {
 		
 		pizzaStore = new ChicagoPizzaStore();
 		pizzaStore.orderPizza("chicken");
+		
+		pizzaStore = new ChicagoPizzaStore();
+		pizzaStore.orderPizza("veggie");
 
 	}
 
