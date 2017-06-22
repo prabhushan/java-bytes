@@ -1,38 +1,47 @@
 package com.prabhu.designpatterns;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.mockito.Mockito.*;
 
-/**
- * Unit test for simple App.
- */
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import com.prabhu.designpatterns.abstractFactoryPattern.AbstractFactoryTest;
+
+import junit.framework.TestCase;
+
+@RunWith(MockitoJUnitRunner.class)
 public class AppTest 
     extends TestCase
 {
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
-    }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
-    }
-
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
-    }
+	@Mock AbstractFactoryTest test;
+	
+	@Spy AbstractFactoryTest test1;
+	
+	@Test
+	public void test(){
+		when(test.printWorld()).thenReturn("Inside Stub");
+		assertEquals("Inside Stub", test.printWorld());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testVoid(){
+		doThrow(new IllegalArgumentException()).when(test).print();
+		test.print();
+	}
+	
+	@Test
+	public void testsometingVoid(){
+		doCallRealMethod().when(test).print();
+		test.print();
+	}
+	
+	@Test
+	public void testSpyVoid(){
+		//doCallRealMethod().when(test).print();
+		test1.print();
+	}
 }
