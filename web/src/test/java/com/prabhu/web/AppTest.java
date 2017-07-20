@@ -33,6 +33,10 @@ public class AppTest
      */
     public void testApp()
     {
-        assertTrue( true );
+        assertEquals("test","test");
+        assertNotSame("test",new String("test"));
+        assertEquals("test",new String("test").intern());
+        assertEquals(new String("test").intern(),new String("test").intern());
+
     }
 }
