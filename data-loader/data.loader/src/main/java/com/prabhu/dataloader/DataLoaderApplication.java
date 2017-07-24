@@ -20,6 +20,7 @@ public class DataLoaderApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		loaderDao.exportData();
+		System.out.println("DataLoader success");
 		
 	}
 	
