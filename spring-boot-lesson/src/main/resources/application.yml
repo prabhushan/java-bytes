@@ -1,0 +1,22 @@
+external:
+  configText: simple text
+
+---
+
+spring: 
+  profiles: dev
+  
+test:
+ port: testportyaml
+ host: testhostyaml
+   
+---
+spring:
+  profiles: prod
+  
+test:
+ port: testportyaml-prod
+ host: testhostyaml-prod
+ 
+
+ 
