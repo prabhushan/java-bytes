@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,7 +23,8 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 @Component
 public class DataLoaderDao {
 
-	private static final String FILE_PATH = "D:\\cleanup\\data.txt";
+	@Autowired
+	Environment environment;
     private final MongoTemplate mongoTemplate;
 
     @Autowired
@@ -33,11 +35,12 @@ public class DataLoaderDao {
    public void exportData() throws IOException{
 //	   List<DoctorInfo> listDoctor = this.mongoTemplate.find(new Query().limit(10000),DoctorInfo.class, "doctorinfo");
 //	   listDoctor.stream().forEach(s->System.out.println(s.getDoctorDetails()));
+	   String filePath=environment.getProperty("file.path");
 	   DBCollection collection = mongoTemplate.getCollection("doctorinfo");
 	     DBCursor cursor = collection.find();        
 	     while(cursor.hasNext()){
 	         DBObject obj = cursor.next();
-		     FileUtil.writeToFile(obj.toString(), FILE_PATH);
+		     FileUtil.writeToFile(obj.toString(), filePath);
 
 	     }
    }
