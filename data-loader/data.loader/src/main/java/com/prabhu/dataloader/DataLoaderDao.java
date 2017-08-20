@@ -1,24 +1,17 @@
 package com.prabhu.dataloader;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.prabhu.dataloader.model.DoctorInfo;
 import com.prabhu.dataloader.utilities.FileUtil;
-
-import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Component
 public class DataLoaderDao {
@@ -36,11 +29,12 @@ public class DataLoaderDao {
 //	   List<DoctorInfo> listDoctor = this.mongoTemplate.find(new Query().limit(10000),DoctorInfo.class, "doctorinfo");
 //	   listDoctor.stream().forEach(s->System.out.println(s.getDoctorDetails()));
 	   String filePath=environment.getProperty("file.path");
+	   File dataFile = new File(filePath);
 	   DBCollection collection = mongoTemplate.getCollection("doctorinfo");
 	     DBCursor cursor = collection.find();        
 	     while(cursor.hasNext()){
 	         DBObject obj = cursor.next();
-		     FileUtil.writeToFile(obj.toString(), filePath);
+		     FileUtil.writeToFile(dataFile,obj.toString());
 
 	     }
    }

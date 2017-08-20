@@ -1,6 +1,6 @@
 package com.prabhu.web.model;
 
-public class OutputModel {
+public class OutputModel extends Base{
 	
 	private String outputName;
 	private String outputPhone;

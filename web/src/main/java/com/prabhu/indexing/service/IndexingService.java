@@ -53,7 +53,7 @@ public class IndexingService {
 		}
 		
 		finally{
-			//searchManager.close();
+			searchManager.close();
 			searchManager.release(searcher);
 		}
 	}

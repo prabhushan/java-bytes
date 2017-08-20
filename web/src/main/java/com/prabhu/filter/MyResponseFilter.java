@@ -21,7 +21,8 @@ public class MyResponseFilter implements ContainerResponseFilter {
 	private ResourceInfo resourceInfo;
 	@Override
 	public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
-			throws IOException {
+			throws IOException {/*
+		
 		System.out.println(resourceInfo.getResourceMethod().getAnnotation(Audit.class).clazz());
 		System.out.println(responseContext.getEntityType());
 		System.out.println("##########-->"+TransactionContext.getContext());
@@ -34,7 +35,7 @@ public class MyResponseFilter implements ContainerResponseFilter {
 			e.printStackTrace();
 		}
 		
-	}
+	*/}
 
 
 }
