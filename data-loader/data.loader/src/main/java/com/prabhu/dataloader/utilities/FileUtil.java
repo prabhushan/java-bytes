@@ -10,7 +10,8 @@ import org.springframework.stereotype.Component;
 
 public class FileUtil {
 
-	public static void writeToFile(String lines,String filePath) throws IOException{
-	FileUtils.writeStringToFile(new File(filePath), lines,true);
+	public static void writeToFile(File file,String lines) throws IOException{
+	FileUtils.writeStringToFile(file, lines,true);
+	FileUtils.writeStringToFile(file, "\n",true);
 	}
 }
