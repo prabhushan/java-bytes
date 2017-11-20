@@ -1,0 +1,33 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.prabhu.boot.SpringBootLessonApplication",
+      "name": "external",
+      "sourceMethod": "public com.prabhu.boot.ExternalConfig config() ",
+      "type": "com.prabhu.boot.ExternalConfig"
+    },
+    {
+      "sourceType": "com.prabhu.boot.ConfigProperties",
+      "name": "test",
+      "type": "com.prabhu.boot.ConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.prabhu.boot.ExternalConfig",
+      "name": "external.config-text",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.prabhu.boot.ConfigProperties",
+      "name": "test.host",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.prabhu.boot.ConfigProperties",
+      "name": "test.port",
+      "type": "java.lang.String"
+    }
+  ]
+}
