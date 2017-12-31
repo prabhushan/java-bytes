@@ -39,7 +39,7 @@ public class TestMock {
 		SpyTest childa = spy(SpyTest.class);
 		MockTest child2 = mock(MockTest.class);
 		parent = new Parent(childa, child2);
-		when(child2.getSomeValue("10")).thenReturn("43");
+	//	when(child2.getSomeValue("10")).thenReturn("43");
 		assertTrue(parent.getSomething("10").equals("4310"));
 	}
 
