@@ -8,7 +8,7 @@ public class MockTest {
 	
 	private MockDBService mockDBService;
 
-	public List<String> getSomeValue(String comparisonValue) {
+	public List<String> getSomeValueAsList(String comparisonValue) {
 		List<String> listValues = mockDBService.getListFromDB();
 		List<String> returnValues = new ArrayList<>();
 		if(listValues == null){
@@ -16,6 +16,7 @@ public class MockTest {
 		}
 		for (String value : listValues) {
 			if(value.equalsIgnoreCase(comparisonValue)){
+				mockDBService.getUserDetails(value.toUpperCase());
 				returnValues.add(value);
 			}
 		}
@@ -23,11 +24,20 @@ public class MockTest {
 		
 	}
 	
+	
+	
 	public MockDBService getMockDBService() {
 		return mockDBService;
 	}
 	public void setMockDBService(MockDBService mockDBService) {
 		this.mockDBService = mockDBService;
+	}
+
+
+
+	public String getSomeValue(String arg) {
+		
+		return arg;
 	}
 	
 	
