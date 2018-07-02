@@ -4,6 +4,7 @@ Implementation-Version: 1.0.0
 Built-By: p.shanmughapriyan
 Implementation-Vendor-Id: com.prabhu
 Build-Jdk: 1.8.0_151
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/boot.camp
 Created-By: Maven Integration for Eclipse
-Implementation-Vendor: Pivotal Software, Inc.
 
