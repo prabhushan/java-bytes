@@ -13,6 +13,11 @@ import javax.mail.internet.MimeMessage.RecipientType;
 
 import com.sun.mail.smtp.SMTPTransport;
 
+/**
+ * Pass this parameters- smtp.office365.com 587 No-Reply-QTSO@tistatech.com XXXXX No-Reply-QTSO@tistatech.com priyan.prabhu@gmail.com hi
+ * @author p.shanmughapriyan
+ *
+ */
 public class Email {
 	public static void main(String[] args) {
 		if (args != null && args.length == 7) {
@@ -28,6 +33,8 @@ public class Email {
 	private void sendEmail(EmailVO emailVO) {
 		Properties props = System.getProperties();
 		try {
+			props.put("mail.smtp.starttls.enable", "true"); 
+
 			Session session = Session.getInstance(props);
 			SMTPTransport t = null;
 			MimeMessage message = buildMessage(session, emailVO, props);
