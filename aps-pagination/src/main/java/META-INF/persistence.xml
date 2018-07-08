@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+   http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+   
+   <persistence-unit name="Eclipselink_JPA" transaction-type="RESOURCE_LOCAL">
+    
+      <class>Employee</class>
+
+      <properties>
+         <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@apsdb-reengineering.cjqj4gfuhy2n.us-east-1.rds.amazonaws.com:1521:APSDB"/>
+         <property name="javax.persistence.jdbc.user" value="stage1"/>
+         <property name="javax.persistence.jdbc.password" value="WZPGmzhc5273#%^"/>
+         <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver"/>
+         <property name="eclipselink.logging.level" value="FINE"/>
+         <property name = "hibernate.show_sql" value = "true" />
+         
+      </properties>
+      
+   </persistence-unit>
+</persistence>

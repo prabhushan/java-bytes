@@ -1,5 +1,10 @@
 *.class
 .settings
 .DS_Store
+<<<<<<< HEAD
 /RemoteSystemsTempFiles/
 */target/*
+=======
+/.metadata/
+*target*
+>>>>>>> ea60a7fd8984ebd21ca338c709104812a2bdc665
