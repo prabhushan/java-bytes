@@ -1,0 +1,11 @@
+application: 
+    datasource: 
+      database: ORACLE
+      url: jdbc:oracle:thin:@apsdb-reengineering.cjqj4gfuhy2n.us-east-1.rds.amazonaws.com:1521:APSDB
+      userName: stage1
+      password: WZPGmzhc5273#%^
+      showSql: true
+      driverClassName: oracle.jdbc.driver.OracleDriver
+      jpaDialect: org.hibernate.dialect.Oracle10gDialect
+      generateDDL: false
+      connectionPoolSize: 15
