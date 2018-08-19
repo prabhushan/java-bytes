@@ -1,0 +1,5 @@
+String test = "a";
+
+if (test == "a"){
+	return true;
+}(boolean) true

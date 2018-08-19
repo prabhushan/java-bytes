@@ -60,7 +60,7 @@ public class DatabaseConfiguration {
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
-		factory.setPackagesToScan("com.tista.aps.data.entity.current", "com.tista.aps.data.entity.stage", "com.tista.aps.data.entity.fallout", "com.tista.aps.data.entity.ssp");
+		factory.setPackagesToScan("com.prabhu.hibernate");
 		factory.setDataSource(dataSource());
 		factory.afterPropertiesSet();
 		factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
