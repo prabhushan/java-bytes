@@ -18,7 +18,7 @@ public class Identity {
 	@SequenceGenerator(name = "IDENTITY_ID_GENERATOR", sequenceName = "CURR_IDENTITY_SEQ", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IDENTITY_ID_GENERATOR")
 	@Column(name = "IDENTITY_ID", unique = true, nullable = false, precision = 22)
-	private long identityId;
+	private String identityId;
 
 	@Column(name = "SOURCE_ID")
 	private String sourceID;

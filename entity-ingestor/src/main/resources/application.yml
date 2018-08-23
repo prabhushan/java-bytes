@@ -1,4 +1,6 @@
-application: 
+application:
+ thread.count: 5
+spring: 
     datasource: 
       database: ORACLE
       url: jdbc:oracle:thin:@apsdb-reengineering.cjqj4gfuhy2n.us-east-1.rds.amazonaws.com:1521:APSDB
@@ -9,3 +11,6 @@ application:
       jpaDialect: org.hibernate.dialect.Oracle10gDialect
       generateDDL: false
       connectionPoolSize: 15
+      hikari.connection-timeout: 60000
+      hikari.maximum-pool-size: 5
+er-service: http://ec2-54-174-170-21.compute-1.amazonaws.com/entity-resolution-service/v1/resolveEntity?resolverType=zentity
