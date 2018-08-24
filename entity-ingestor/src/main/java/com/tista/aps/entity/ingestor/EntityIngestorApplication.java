@@ -16,12 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tista.aps.entity.postprocessor.EntityResolutionIngester;
 
+import lombok.extern.slf4j.Slf4j;
+
 @SpringBootApplication
 @ComponentScan({ "com.tista.aps.*" })
+@Slf4j
 public class EntityIngestorApplication implements CommandLineRunner {
 
 	@Autowired
-	CustomerRepository customerRepository;
+	IdentityRepository customerRepository;
 
 	@Autowired
 	EntityResolutionIngester entityResolutionIngester;
@@ -45,7 +48,7 @@ public class EntityIngestorApplication implements CommandLineRunner {
 	@Transactional(readOnly = true)
 	public void run(String... arg0) throws Exception {
 		try (Stream<Identity> identityStream = customerRepository.findIdentityIds()) {
-			identityStream.forEach(s -> postProcess(s));
+			identityStream.forEach(this::postProcess);
 		} finally {
 			executorService.shutdown();
 
@@ -58,8 +61,7 @@ public class EntityIngestorApplication implements CommandLineRunner {
 			try {
 				entityResolutionIngester.ingestIdentity(s.getIdentityId());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.error("Unexpected error - ", e);
 			}
 		});
 	}
