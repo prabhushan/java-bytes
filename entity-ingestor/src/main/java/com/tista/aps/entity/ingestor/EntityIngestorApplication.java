@@ -2,6 +2,7 @@ package com.tista.aps.entity.ingestor;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
 import com.tista.aps.entity.postprocessor.EntityResolutionIngester;
 
@@ -47,21 +49,26 @@ public class EntityIngestorApplication implements CommandLineRunner {
 	@Override
 	@Transactional(readOnly = true)
 	public void run(String... arg0) throws Exception {
+		StopWatch stopWatch = new StopWatch("Main execution");
+		stopWatch.start("Main execution");
 		try (Stream<Identity> identityStream = customerRepository.findIdentityIds()) {
 			identityStream.forEach(this::postProcess);
 		} finally {
 			executorService.shutdown();
-
+			executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+			stopWatch.stop();
+			log.info("Total time taken for execution -" + stopWatch.prettyPrint());
 		}
 
 	}
 
 	private void postProcess(Identity s) {
 		executorService.submit(() -> {
+			long startTime = System.nanoTime();
 			try {
 				entityResolutionIngester.ingestIdentity(s.getIdentityId());
-			} catch (Exception e) {
-				log.error("Unexpected error - ", e);
+			} finally {
+				log.info("Total time taken in ms --" + (System.nanoTime() - startTime) / 1000_000);
 			}
 		});
 	}

@@ -22,16 +22,22 @@ public class EntityResolutionIngester {
 	@Value("${er-service}")
 	private String erServiceUrl;
 
-	public void ingestIdentity(String identityId) throws Exception {
+	public void ingestIdentity(String identityId) {
 		log.info("Calling ER started -" + identityId);
-		makeHttpCall(objectMapper
-				.writeValueAsString(ProfileEntity.builder().inputIdentitiesList(Arrays.asList(identityId)).build()));
+		String payLoad = null;
+		try {
+			payLoad = objectMapper
+					.writeValueAsString(ProfileEntity.builder().inputIdentitiesList(Arrays.asList(identityId)).build());
+			makeHttpCall(payLoad);
+		} catch (Exception e) {
+			log.error("Identity" + identityId + "Payload" + payLoad, e);
+		}
+
 		log.info("Calling ER completed -" + identityId);
 
 	}
 
 	private HttpResponse<JsonNode> makeHttpCall(String payLoad) throws UnirestException {
-
 		return Unirest.post(erServiceUrl).header("Content-Type", "application/json").body(payLoad).asJson();
 
 	}

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IdentityRepository extends JpaRepository<Identity, Long> {
 
-	@Query("SELECT c FROM Identity c order by UPDATED_DATE asc")
+	@Query("SELECT c FROM Identity c where ACTION_FLAG = 'A' order by UPDATED_DATE asc")
 	public Stream<Identity> findIdentityIds();
 
 }
