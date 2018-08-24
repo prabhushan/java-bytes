@@ -24,18 +24,18 @@ import lombok.extern.slf4j.Slf4j;
 public class EntityIngestorApplication implements CommandLineRunner {
 
 	@Autowired
-	IdentityRepository customerRepository;
+	private IdentityRepository customerRepository;
 
 	@Autowired
-	EntityResolutionIngester entityResolutionIngester;
+	private EntityResolutionIngester entityResolutionIngester;
 
-	ExecutorService executorService;
+	private ExecutorService executorService;
 
 	@Value("${application.thread.count}")
-	int threadCount;
+	private int threadCount;
 
 	@PostConstruct
-	void preInitiaize() {
+	private void preInitiaize() {
 		executorService = Executors.newFixedThreadPool(threadCount);
 
 	}

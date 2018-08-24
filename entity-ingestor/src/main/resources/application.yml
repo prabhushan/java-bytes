@@ -1,5 +1,5 @@
 application:
- thread.count: 5
+ thread.count: 100
 spring: 
     datasource: 
       database: ORACLE
