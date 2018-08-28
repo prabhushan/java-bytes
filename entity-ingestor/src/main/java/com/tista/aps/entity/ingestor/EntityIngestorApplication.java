@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -66,9 +67,11 @@ public class EntityIngestorApplication implements CommandLineRunner {
 		executorService.submit(() -> {
 			long startTime = System.nanoTime();
 			try {
+				MDC.put("identity-id", s.getIdentityId());
 				entityResolutionIngester.ingestIdentity(s.getIdentityId());
 			} finally {
-				log.info("Total time taken in ms --" + (System.nanoTime() - startTime) / 1000_000);
+				log.info("Total time taken for ER in ms --" + (System.nanoTime() - startTime) / 1000_000);
+				MDC.clear();
 			}
 		});
 	}

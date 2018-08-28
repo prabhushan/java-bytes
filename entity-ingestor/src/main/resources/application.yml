@@ -1,5 +1,5 @@
 application:
- thread.count: 100
+ thread.count: 25
 spring: 
     datasource: 
       database: ORACLE
@@ -13,11 +13,11 @@ spring:
       connectionPoolSize: 15
       hikari.connection-timeout: 60000
       hikari.maximum-pool-size: 5
-er-service: http://ec2-54-174-170-21.compute-1.amazonaws.com/entity-resolution-service/v1/resolveEntity?resolverType=zentity
+er-service: http://ec2-54-174-170-21.compute-1.amazonaws.com/entity-resolution-service/v1/resolve-entity?resolverType=zentity
 
 logging:
   level:
     root: INFO
   file: ingestor.log    
   pattern:
-   console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} ${spring.application.name} %-5level [%thread]  %logger{15} - %msg%n'      
+   console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread]  identity # - %X{identity-id}  - %msg%n'      

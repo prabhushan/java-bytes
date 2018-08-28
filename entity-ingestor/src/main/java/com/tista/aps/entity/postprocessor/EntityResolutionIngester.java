@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
@@ -23,22 +22,22 @@ public class EntityResolutionIngester {
 	private String erServiceUrl;
 
 	public void ingestIdentity(String identityId) {
-		log.info("Calling ER started -" + identityId);
+		log.info("Calling ER started");
 		String payLoad = null;
 		try {
 			payLoad = objectMapper
 					.writeValueAsString(ProfileEntity.builder().inputIdentitiesList(Arrays.asList(identityId)).build());
 			makeHttpCall(payLoad);
 		} catch (Exception e) {
-			log.error("Identity" + identityId + "Payload" + payLoad, e);
+			log.error("Payload" + payLoad, e);
 		}
 
-		log.info("Calling ER completed -" + identityId);
+		log.info("Calling ER completed -");
 
 	}
 
-	private HttpResponse<JsonNode> makeHttpCall(String payLoad) throws UnirestException {
-		return Unirest.post(erServiceUrl).header("Content-Type", "application/json").body(payLoad).asJson();
+	private HttpResponse<String> makeHttpCall(String payLoad) throws UnirestException {
+		return Unirest.post(erServiceUrl).header("Content-Type", "application/json").body(payLoad).asString();
 
 	}
 
