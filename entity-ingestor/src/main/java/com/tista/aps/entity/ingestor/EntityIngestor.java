@@ -10,10 +10,7 @@ import javax.annotation.PostConstruct;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
@@ -21,13 +18,12 @@ import com.tista.aps.entity.postprocessor.EntityResolutionIngester;
 
 import lombok.extern.slf4j.Slf4j;
 
-@SpringBootApplication
-@ComponentScan({ "com.tista.aps.*" })
+@Service
 @Slf4j
-public class EntityIngestorApplication implements CommandLineRunner {
+public class EntityIngestor {
 
 	@Autowired
-	private IdentityRepository customerRepository;
+	private IdentityRepository identityRepository;
 
 	@Autowired
 	private EntityResolutionIngester entityResolutionIngester;
@@ -43,16 +39,11 @@ public class EntityIngestorApplication implements CommandLineRunner {
 
 	}
 
-	public static void main(String[] args) {
-		SpringApplication.run(EntityIngestorApplication.class, args);
-	}
-
-	@Override
 	@Transactional(readOnly = true)
-	public void run(String... arg0) throws Exception {
+	public void process() throws InterruptedException {
 		StopWatch stopWatch = new StopWatch("Main execution");
 		stopWatch.start("Main execution");
-		try (Stream<Identity> identityStream = customerRepository.findIdentityIds()) {
+		try (Stream<Identity> identityStream = identityRepository.findIdentityIds()) {
 			identityStream.forEach(this::postProcess);
 		} finally {
 			executorService.shutdown();
