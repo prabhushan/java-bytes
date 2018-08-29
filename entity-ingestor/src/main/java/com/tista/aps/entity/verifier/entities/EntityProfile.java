@@ -22,6 +22,6 @@ public class EntityProfile {
 
 	@OneToMany
 	@JoinColumn(name = "ENTITY_PROFILE_ID")
-	private List<EntityProfileIdnty> listIdentities;
+	private List<EntityProfileIdnty> listEntityPofileIdentities;
 
 }

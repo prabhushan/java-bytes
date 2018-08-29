@@ -14,25 +14,27 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class EntityResolutionIngester {
+public class ERServiceCaller {
 
 	final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Value("${er-service}")
 	private String erServiceUrl;
 
-	public void ingestIdentity(String identityId) {
+	public HttpResponse<String> resolveIdentity(String identityId) {
 		log.info("Calling ER started");
 		String payLoad = null;
 		try {
 			payLoad = objectMapper
 					.writeValueAsString(ProfileEntity.builder().inputIdentitiesList(Arrays.asList(identityId)).build());
-			makeHttpCall(payLoad);
+			return makeHttpCall(payLoad);
 		} catch (Exception e) {
 			log.error("Payload" + payLoad, e);
+		} finally {
+			log.info("Calling ER completed -");
 		}
 
-		log.info("Calling ER completed -");
+		return null;
 
 	}
 

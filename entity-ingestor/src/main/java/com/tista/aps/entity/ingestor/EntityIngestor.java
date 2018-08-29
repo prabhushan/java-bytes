@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
-import com.tista.aps.entity.postprocessor.EntityResolutionIngester;
+import com.tista.aps.entity.postprocessor.ERServiceCaller;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,7 +26,7 @@ public class EntityIngestor {
 	private IdentityRepository identityRepository;
 
 	@Autowired
-	private EntityResolutionIngester entityResolutionIngester;
+	private ERServiceCaller erServiceCaller;
 
 	private ExecutorService executorService;
 
@@ -59,7 +59,7 @@ public class EntityIngestor {
 			long startTime = System.nanoTime();
 			try {
 				MDC.put("identity-id", s.getIdentityId());
-				entityResolutionIngester.ingestIdentity(s.getIdentityId());
+				erServiceCaller.resolveIdentity(s.getIdentityId());
 			} finally {
 				log.info("Total time taken for ER in ms --" + (System.nanoTime() - startTime) / 1000_000);
 				MDC.clear();

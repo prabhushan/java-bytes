@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface EntityProfileRespository extends JpaRepository<EntityProfile, Long> {
 
-	@Query("SELECT c FROM EntityProfile c where ACTION_FLAG = 'A' order by UPDATED_DATE asc")
+	@Query("SELECT c FROM EntityProfile c where ACTION_FLAG = 'A' and rownum < 10 order by UPDATED_DATE asc")
 	public Stream<EntityProfile> findEntityProfiles();
 }
