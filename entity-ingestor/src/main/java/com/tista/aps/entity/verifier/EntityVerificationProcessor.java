@@ -40,15 +40,19 @@ public class EntityVerificationProcessor {
 	@Value("${application.thread.count}")
 	private int threadCount;
 
+	@Value("${report.path}")
+	private String path;
+
 	@Value("${report.filename}")
 	private String fileName;
 
 	private File reportFile;
 
 	@PostConstruct
-	private void preInitiaize() {
-		executorService = Executors.newFixedThreadPool(1);
-		reportFile = new File(fileName);
+	private void preInitiaize() throws IOException {
+		executorService = Executors.newFixedThreadPool(threadCount);
+		reportFile = new File(path + System.currentTimeMillis() + "-" + fileName);
+		ReportGenerator.addHeader(reportFile);
 
 	}
 
