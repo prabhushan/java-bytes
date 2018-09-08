@@ -8,22 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@EnableJpaRepositories("com.prabhu.hibernate.repository")
-@EnableTransactionManagement
-// @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 public class DatabaseConfiguration {
 
 	private final Logger logger = LoggerFactory.getLogger(DatabaseConfiguration.class);
@@ -60,7 +55,7 @@ public class DatabaseConfiguration {
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(jpaVendorAdapter);
-		factory.setPackagesToScan("com.prabhu.hibernate");
+		factory.setPackagesToScan("com.prabhu.*");
 		factory.setDataSource(dataSource());
 		factory.afterPropertiesSet();
 		factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());

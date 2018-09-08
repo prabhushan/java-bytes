@@ -17,6 +17,7 @@ public class CompletableThreadManagement {
 		System.out.println(Runtime.getRuntime().availableProcessors());
 		ForkJoinPool pool = ForkJoinPool.commonPool();
 		System.out.println(pool);
+
 		CompletableFuture.supplyAsync(CompletableThreadManagement::getProcessOrder)
 				.thenApply(CompletableThreadManagement::processOrder).thenAccept(o -> System.out.println(o)).get();
 		System.out.println("DONE" + Thread.currentThread());

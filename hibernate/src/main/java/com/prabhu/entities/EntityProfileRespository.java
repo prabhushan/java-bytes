@@ -1,0 +1,12 @@
+package com.prabhu.entities;
+
+import java.util.stream.Stream;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface EntityProfileRespository extends JpaRepository<EntityProfile, Long> {
+
+	@Query("SELECT c FROM EntityProfile c where ACTION_FLAG = 'A' order by UPDATED_DATE asc")
+	public Stream<EntityProfile> findEntityProfiles();
+}

@@ -15,10 +15,18 @@ public class TestController {
 	@Autowired
 	private ApsCommonLkpRepository apsRepo;
 
+	@Autowired
+	private ServiceLayer service;
+
 	@RequestMapping(value = "/test/{type}", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ApsCommonLkp> cacheRepoLookup(@PathVariable("type") String type) {
 		return apsRepo.findByType(type);
 	}
 
+	@RequestMapping(value = "/getIdentity/{profileId}", method = RequestMethod.GET)
+	@ResponseBody
+	public List fetchEntityProfile(@PathVariable("profileId") String profileId) {
+		return service.getCurrIdentities(profileId);
+	}
 }
