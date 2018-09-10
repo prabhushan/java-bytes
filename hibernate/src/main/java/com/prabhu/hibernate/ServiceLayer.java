@@ -20,9 +20,10 @@ public class ServiceLayer {
 	EntityManagerFactory entityFactory;
 
 	public List getCurrIdentities(String profileId) {
-		EntityProfile entityProfile = EntityProfile.builder().entityProfileId(profileId).build();
-		return entityFactory.createEntityManager().createNamedQuery("getEntityProfile").setParameter("id", profileId)
-				.getResultList();
+		List<EntityProfile> listEntityProfile = entityFactory.createEntityManager().createNamedQuery("getEntityProfile")
+				.setParameter("id", profileId).getResultList();
+
+		return listEntityProfile;
 
 	}
 
