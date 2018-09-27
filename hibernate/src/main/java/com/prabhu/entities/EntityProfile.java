@@ -2,27 +2,24 @@ package com.prabhu.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "CURR_ENTITY_PROFILE")
-@Data
-@Builder
+// @Data
+// @Builder
 @NamedQuery(name = "getEntityProfile", query = "select c from EntityProfile c where entityProfileId=:id")
-@NoArgsConstructor
-@AllArgsConstructor
+// @NoArgsConstructor
+// @AllArgsConstructor
 
 public class EntityProfile {
 
@@ -30,9 +27,46 @@ public class EntityProfile {
 	@Column(name = "ENTITY_PROFILE_ID", unique = true, nullable = false, precision = 22)
 	private String entityProfileId;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ENTITY_PROFILE_ID")
+	public String getEntityProfileId() {
+		return entityProfileId;
+	}
 
-	private List<EntityProfileIdnty> listEntityPofileIdentities;
+	public void setEntityProfileId(String entityProfileId) {
+		this.entityProfileId = entityProfileId;
+	}
+
+	public String getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(String entityId) {
+		this.entityId = entityId;
+	}
+
+	public String getActionFlag() {
+		return actionFlag;
+	}
+
+	public void setActionFlag(String actionFlag) {
+		this.actionFlag = actionFlag;
+	}
+
+	public List<EntityProfileIdnty> getEntityProfileIdnty() {
+		return entityProfileIdnty;
+	}
+
+	public void setEntityProfileIdnty(List<EntityProfileIdnty> entityProfileIdnty) {
+		this.entityProfileIdnty = entityProfileIdnty;
+	}
+
+	@Column(name = "ENTITY_ID")
+	private String entityId;
+
+	@Column(name = "ACTION_FLAG")
+	private String actionFlag;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "currEntityProfile")
+	@JsonIgnoreProperties("currEntityProfile")
+	private List<EntityProfileIdnty> entityProfileIdnty;
 
 }

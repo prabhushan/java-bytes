@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prabhu.entities.EntityProfile;
+import com.prabhu.entities.EntityProfileIdnty;
+import com.prabhu.entities.ReportLcmIdentity;
+
 @RestController
 public class TestController {
 
@@ -26,7 +30,24 @@ public class TestController {
 
 	@RequestMapping(value = "/getIdentity/{profileId}", method = RequestMethod.GET)
 	@ResponseBody
-	public List fetchEntityProfile(@PathVariable("profileId") String profileId) {
-		return service.getCurrIdentities(profileId);
+	public EntityProfile fetchEntityProfile(@PathVariable("profileId") String profileId) {
+		EntityProfile ep = service.getCurrIdentities(profileId);
+
+		return ep;
+	}
+
+	@RequestMapping(value = "/getReport/{reportID}", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ReportLcmIdentity> fetchReport(@PathVariable("reportID") String reportID) {
+		List<ReportLcmIdentity> list = service.getReportLCM(reportID);
+		return list;
+	}
+
+	@RequestMapping(value = "/fetchEntityProfile/{entityProfileIdentityId}", method = RequestMethod.GET)
+	@ResponseBody
+	public EntityProfileIdnty fetchEntityProfileIdentityId(
+			@PathVariable("entityProfileIdentityId") String entityProfileIdentityId) {
+		return service.getCurrEntityProfileIdentity(entityProfileIdentityId);
+		// return null;// service.getCurrEntityProfileIdentity(entityProfileIdentityId);
 	}
 }
