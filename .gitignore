@@ -4,3 +4,6 @@
 /.metadata/
 *target*
 /.recommenders/
+.classpath
+.mvn*
+mvnw*

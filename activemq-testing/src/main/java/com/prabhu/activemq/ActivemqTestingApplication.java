@@ -4,9 +4,9 @@ import java.io.File;
 import java.nio.charset.Charset;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -18,7 +18,10 @@ public class ActivemqTestingApplication implements CommandLineRunner {
 	QueueProducerTest queueProducer;
 
 	public static void main(String[] args) {
-		SpringApplication.run(ActivemqTestingApplication.class, args);
+		System.out.println(
+				"13) Strip whitespace >>>" + StringUtils.replace("     a  00      ", "0", "").trim().isEmpty());
+
+		// SpringApplication.run(ActivemqTestingApplication.class, args);
 	}
 
 	@Override
