@@ -1,5 +1,6 @@
 package com.prabhu.activemq;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,7 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 
 import org.apache.activemq.ScheduledMessage;
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,26 +37,36 @@ public class QueueBrowser {
 	}
 
 	public void browser() throws JMSException {
-		Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		Session session = null;
+		try {
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
-		// Create the Browse Destination and the Reply To location
-		Destination requestBrowse = session.createTopic(ScheduledMessage.AMQ_SCHEDULER_MANAGEMENT_DESTINATION);
-		Destination browseDest = session.createQueue("test-browser-queue");
+			// Create the Browse Destination and the Reply To location
+			Destination requestBrowse = session.createTopic(ScheduledMessage.AMQ_SCHEDULER_MANAGEMENT_DESTINATION);
+			Destination browseDest = session.createQueue("test-browser-queue");
 
-		// Create the "Browser"
-		MessageConsumer browser = session.createConsumer(browseDest);
+			// Create the "Browser"
+			MessageConsumer browser = session.createConsumer(browseDest);
 
-		// Send the browse request
-		MessageProducer producer = session.createProducer(requestBrowse);
-		Message request = session.createMessage();
-		request.setStringProperty(ScheduledMessage.AMQ_SCHEDULER_ACTION, ScheduledMessage.AMQ_SCHEDULER_ACTION_BROWSE);
-		request.setJMSReplyTo(browseDest);
-		producer.send(request);
+			// Send the browse request
+			MessageProducer producer = session.createProducer(requestBrowse);
+			Message request = session.createMessage();
+			request.setStringProperty(ScheduledMessage.AMQ_SCHEDULER_ACTION,
+					ScheduledMessage.AMQ_SCHEDULER_ACTION_BROWSE);
+			request.setJMSReplyTo(browseDest);
+			producer.send(request);
+			log.info("Push completed");
+		} catch (Exception ex) {
+			log.log(Level.SEVERE, ExceptionUtils.getFullStackTrace(ex));
+		} finally {
 
-		// Message scheduled = browser.receive();
-		// while (scheduled != null) {
-		// log.info(scheduled.);
-		// }
+			if (session != null) {
+				session.close();
+			}
+
+			connection.close();
+
+		}
 
 	}
 
