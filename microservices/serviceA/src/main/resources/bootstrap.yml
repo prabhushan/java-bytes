@@ -1,0 +1,14 @@
+spring:
+ application:
+    name: serviceB
+ profiles:
+    active:
+      prod
+ cloud:
+    config:
+      uri: http://localhost:8888
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
