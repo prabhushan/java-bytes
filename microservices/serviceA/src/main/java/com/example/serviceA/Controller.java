@@ -15,7 +15,7 @@ public class Controller {
 	private String valueProperties;
 
 	@Autowired
-	private ServiceBClient serviceClient;
+	private LicenseService licenseService;
 
 	@GetMapping("org/get")
 	public String getOrgDetails() {
@@ -24,7 +24,7 @@ public class Controller {
 
 	@GetMapping("{org}/{license}")
 	public License getLicense(@PathVariable("org") String organizationId, @PathVariable("license") String licenseId) {
-		return serviceClient.getLicensesWithClient(organizationId, licenseId);
+		return licenseService.getLicensesWithClient(organizationId, licenseId);
 
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //@FeignClient(url = "http://localhost:8081/", name = "SERVICEB")
 @FeignClient(value = "SERVICEB")
 @RequestMapping("serviceB")
+
 public interface ServiceBClient {
 
 	@RequestMapping(value = "/{licenseId}/{organizationId}", method = RequestMethod.GET)
